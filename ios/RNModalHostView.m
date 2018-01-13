@@ -1,29 +1,26 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  RNModalHostView.m
+//  RNModalNoUnmount
+//
+//  Created by binh nguyen on 1/13/18.
+//  Copyright © 2018 Facebook. All rights reserved.
+//
 
 #import "RNModalHostView.h"
 
-#import <UIKit/UIKit.h>
-
-#import "RCTAssert.h"
-#import "RCTBridge.h"
-#import "RNModalHostViewController.h"
-#import "RCTTouchHandler.h"
-#import "RCTUIManager.h"
-#import "RCTUtils.h"
-#import "UIView+React.h"
+#import <React/RCTAssert.h>
+#import <React/RCTBridge.h>
+#import <React/RCTModalHostViewController.h>
+#import <React/RCTTouchHandler.h>
+#import <React/RCTUIManager.h>
+#import <React/RCTUtils.h>
+#import <React/UIView+React.h>
 
 @implementation RNModalHostView
 {
   __weak RCTBridge *_bridge;
   BOOL _isPresented;
-  RNModalHostViewController *_modalViewController;
+  RCTModalHostViewController *_modalViewController;
   RCTTouchHandler *_touchHandler;
   UIView *_reactSubview;
 #if TARGET_OS_TV
@@ -31,9 +28,8 @@
 #else
   UIInterfaceOrientation _lastKnownOrientation;
 #endif
-
+  
 }
-
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
 
@@ -41,7 +37,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
 {
   if ((self = [super initWithFrame:CGRectZero])) {
     _bridge = bridge;
-    _modalViewController = [RNModalHostViewController new];
+    _modalViewController = [[RCTModalHostViewController alloc] init];
     UIView *containerView = [UIView new];
     containerView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _modalViewController.view = containerView;
@@ -51,22 +47,22 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
     _menuButtonGestureRecognizer.allowedPressTypes = @[@(UIPressTypeMenu)];
 #endif
     _isPresented = NO;
-
+    
     __weak typeof(self) weakSelf = self;
     _modalViewController.boundsDidChangeBlock = ^(CGRect newBounds) {
       [weakSelf notifyForBoundsChange:newBounds];
     };
   }
-
+  
   return self;
 }
 
 #if TARGET_OS_TV
 - (void)menuButtonPressed:(__unused UIGestureRecognizer *)gestureRecognizer
 {
-    if (_onRequestClose) {
-        _onRequestClose(nil);
-    }
+  if (_onRequestClose) {
+    _onRequestClose(nil);
+  }
 }
 
 - (void)setOnRequestClose:(RCTDirectEventBlock)onRequestClose
@@ -93,22 +89,22 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
 - (void)notifyForOrientationChange
 {
 #if !TARGET_OS_TV
-  if (!_onOrientationChange) {
+  if (!self.onOrientationChange) {
     return;
   }
-
+  
   UIInterfaceOrientation currentOrientation = [RCTSharedApplication() statusBarOrientation];
   if (currentOrientation == _lastKnownOrientation) {
     return;
   }
   _lastKnownOrientation = currentOrientation;
-
+  
   BOOL isPortrait = currentOrientation == UIInterfaceOrientationPortrait || currentOrientation == UIInterfaceOrientationPortraitUpsideDown;
   NSDictionary *eventPayload =
   @{
     @"orientation": isPortrait ? @"portrait" : @"landscape",
     };
-  _onOrientationChange(eventPayload);
+  self.onOrientationChange(eventPayload);
 #endif
 }
 
@@ -123,8 +119,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
   }
 #endif
   subview.autoresizingMask = UIViewAutoresizingFlexibleHeight |
-                             UIViewAutoresizingFlexibleWidth;
-
+  UIViewAutoresizingFlexibleWidth;
+  
   [_modalViewController.view insertSubview:subview atIndex:0];
   _reactSubview = subview;
 }
@@ -151,35 +147,34 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
 - (void)dismissModalViewController
 {
   if (_isPresented) {
-    [_delegate dismissModalHostView:self withViewController:_modalViewController animated:[self hasAnimationType]];
+    [self.delegate dismissModalHostView:self withViewController:_modalViewController animated:[self hasAnimationType]];
     _isPresented = NO;
   }
 }
 
 - (void)setVisible:(BOOL)visible {
-  if (visible) {
-    [_delegate presentModalHostView:self withViewController:_modalViewController animated:[self hasAnimationType]];
+  if (visible && !_isPresented) {
+    [self.delegate presentModalHostView:self withViewController:_modalViewController animated:[self hasAnimationType]];
     _isPresented = YES;
-  } else if (_isPresented) {
-    [_delegate dismissModalHostView:self withViewController:_modalViewController animated:[self hasAnimationType]];
+  } else if (!visible && _isPresented) {
+    [self.delegate dismissModalHostView:self withViewController:_modalViewController animated:[self hasAnimationType]];
     _isPresented = NO;
   }
-  _visible = visible;
 }
 
 - (void)didMoveToWindow
 {
   [super didMoveToWindow];
-
+  
   // In the case where there is a LayoutAnimation, we will be reinserted into the view hierarchy but only for aesthetic purposes.
   // In such a case, we should NOT represent the <Modal>.
   if (!self.userInteractionEnabled && ![self.superview.reactSubviews containsObject:self]) {
     return;
   }
-
+  
   if (!_isPresented && self.window) {
     RCTAssert(self.reactViewController, @"Can't present modal view controller without a presenting view controller");
-
+    
 #if !TARGET_OS_TV
     _modalViewController.supportedInterfaceOrientations = [self supportedOrientationsMask];
 #endif
@@ -191,8 +186,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
     if (self.presentationStyle != UIModalPresentationNone) {
       _modalViewController.modalPresentationStyle = self.presentationStyle;
     }
-    if (self.visible) {
-      [_delegate presentModalHostView:self withViewController:_modalViewController animated:[self hasAnimationType]];
+    if (_visible) {
+      [self.delegate presentModalHostView:self withViewController:_modalViewController animated:[self hasAnimationType]];
       _isPresented = YES;
     }
   }
@@ -201,7 +196,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
 - (void)didMoveToSuperview
 {
   [super didMoveToSuperview];
-
+  
   if (_isPresented && !self.superview) {
     [self dismissModalViewController];
   }
@@ -229,23 +224,23 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:coder)
   if (self.isTransparent != transparent) {
     return;
   }
-
+  
   _modalViewController.modalPresentationStyle = transparent ? UIModalPresentationOverFullScreen : UIModalPresentationFullScreen;
 }
 
 #if !TARGET_OS_TV
 - (UIInterfaceOrientationMask)supportedOrientationsMask
 {
-  if (_supportedOrientations.count == 0) {
+  if (self.supportedOrientations.count == 0) {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
       return UIInterfaceOrientationMaskAll;
     } else {
       return UIInterfaceOrientationMaskPortrait;
     }
   }
-
+  
   UIInterfaceOrientationMask supportedOrientations = 0;
-  for (NSString *orientation in _supportedOrientations) {
+  for (NSString *orientation in self.supportedOrientations) {
     if ([orientation isEqualToString:@"portrait"]) {
       supportedOrientations |= UIInterfaceOrientationMaskPortrait;
     } else if ([orientation isEqualToString:@"portrait-upside-down"]) {

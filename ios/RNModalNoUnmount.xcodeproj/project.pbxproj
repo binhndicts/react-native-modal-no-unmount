@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B6A8BBB20086B2C00A23D47 /* RNModalHostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6A8BB620086B2B00A23D47 /* RNModalHostViewController.m */; };
-		0B6A8BBC20086B2C00A23D47 /* RNModalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6A8BB820086B2B00A23D47 /* RNModalManager.m */; };
-		0B6A8BBD20086B2C00A23D47 /* RNModalHostView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6A8BB920086B2B00A23D47 /* RNModalHostView.m */; };
-		0B6A8BBE20086B2C00A23D47 /* RNModalHostViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6A8BBA20086B2B00A23D47 /* RNModalHostViewManager.m */; };
+		0B834F212009793B0050F673 /* RNModalHostView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B834F202009793B0050F673 /* RNModalHostView.m */; };
+		B3E7B58A1CC2AC0600A0062D /* RNModalNoUnmountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNModalNoUnmountManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,15 +24,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B6A8BB320086B2B00A23D47 /* RNModalHostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNModalHostView.h; sourceTree = "<group>"; };
-		0B6A8BB420086B2B00A23D47 /* RNModalHostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNModalHostViewController.h; sourceTree = "<group>"; };
-		0B6A8BB520086B2B00A23D47 /* RNModalHostViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNModalHostViewManager.h; sourceTree = "<group>"; };
-		0B6A8BB620086B2B00A23D47 /* RNModalHostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNModalHostViewController.m; sourceTree = "<group>"; };
-		0B6A8BB720086B2B00A23D47 /* RNModalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNModalManager.h; sourceTree = "<group>"; };
-		0B6A8BB820086B2B00A23D47 /* RNModalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNModalManager.m; sourceTree = "<group>"; };
-		0B6A8BB920086B2B00A23D47 /* RNModalHostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNModalHostView.m; sourceTree = "<group>"; };
-		0B6A8BBA20086B2B00A23D47 /* RNModalHostViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNModalHostViewManager.m; sourceTree = "<group>"; };
+		0B834F1F2009793B0050F673 /* RNModalHostView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNModalHostView.h; sourceTree = "<group>"; };
+		0B834F202009793B0050F673 /* RNModalHostView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNModalHostView.m; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libRNModalNoUnmount.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNModalNoUnmount.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3E7B5881CC2AC0600A0062D /* RNModalNoUnmountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNModalNoUnmountManager.h; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* RNModalNoUnmountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNModalNoUnmountManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,14 +53,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				0B6A8BB320086B2B00A23D47 /* RNModalHostView.h */,
-				0B6A8BB920086B2B00A23D47 /* RNModalHostView.m */,
-				0B6A8BB420086B2B00A23D47 /* RNModalHostViewController.h */,
-				0B6A8BB620086B2B00A23D47 /* RNModalHostViewController.m */,
-				0B6A8BB520086B2B00A23D47 /* RNModalHostViewManager.h */,
-				0B6A8BBA20086B2B00A23D47 /* RNModalHostViewManager.m */,
-				0B6A8BB720086B2B00A23D47 /* RNModalManager.h */,
-				0B6A8BB820086B2B00A23D47 /* RNModalManager.m */,
+				0B834F1F2009793B0050F673 /* RNModalHostView.h */,
+				0B834F202009793B0050F673 /* RNModalHostView.m */,
+				B3E7B5881CC2AC0600A0062D /* RNModalNoUnmountManager.h */,
+				B3E7B5891CC2AC0600A0062D /* RNModalNoUnmountManager.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,10 +117,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B6A8BBB20086B2C00A23D47 /* RNModalHostViewController.m in Sources */,
-				0B6A8BBC20086B2C00A23D47 /* RNModalManager.m in Sources */,
-				0B6A8BBE20086B2C00A23D47 /* RNModalHostViewManager.m in Sources */,
-				0B6A8BBD20086B2C00A23D47 /* RNModalHostView.m in Sources */,
+				0B834F212009793B0050F673 /* RNModalHostView.m in Sources */,
+				B3E7B58A1CC2AC0600A0062D /* RNModalNoUnmountManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,28 +1,27 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
+//
+//  RNModalHostView.h
+//  RNModalNoUnmount
+//
+//  Created by binh nguyen on 1/13/18.
+//  Copyright © 2018 Facebook. All rights reserved.
+//
 
 #import <UIKit/UIKit.h>
 
 #import <React/RCTInvalidating.h>
-#import <React/RNModalHostViewManager.h>
+#import <React/RCTModalHostViewManager.h>
 #import <React/RCTView.h>
+#import <React/RCTModalHostView.h>
 
 @class RCTBridge;
-@class RNModalHostViewController;
-
-@protocol RNModalHostViewInteractor;
+@class RCTModalHostViewController;
 
 @interface RNModalHostView : UIView <RCTInvalidating>
 
 @property (nonatomic, copy) NSString *animationType;
 @property (nonatomic, assign) UIModalPresentationStyle presentationStyle;
 @property (nonatomic, assign, getter=isTransparent) BOOL transparent;
+@property (nonatomic) BOOL visible;
 
 @property (nonatomic, copy) RCTDirectEventBlock onShow;
 
@@ -38,12 +37,5 @@
 #endif
 
 - (instancetype)initWithBridge:(RCTBridge *)bridge NS_DESIGNATED_INITIALIZER;
-
-@end
-
-@protocol RCTModalHostViewInteractor <NSObject>
-
-- (void)presentModalHostView:(RNModalHostView *)modalHostView withViewController:(RNModalHostViewController *)viewController animated:(BOOL)animated;
-- (void)dismissModalHostView:(RNModalHostView *)modalHostView withViewController:(RNModalHostViewController *)viewController animated:(BOOL)animated;
 
 @end

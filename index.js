@@ -1,5 +1,5 @@
 'use strict';
 
-import RNModal from './RNModal';
+import RNModalNoUnmount from './RNModalNoUnmount';
 
-export default RNModal;
+export default RNModalNoUnmount;

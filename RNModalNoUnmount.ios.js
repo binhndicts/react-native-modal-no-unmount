@@ -11,19 +11,20 @@
  */
 'use strict';
 
-const AppContainer = require('AppContainer');
-const I18nManager = require('I18nManager');
-const NativeEventEmitter = require('NativeEventEmitter');
-const NativeModules = require('NativeModules');
-const Platform = require('Platform');
-const React = require('React');
+const AppContainer = require('react-native/Libraries/ReactNative/AppContainer');
+const I18nManager = require('react-native/Libraries/ReactNative/I18nManager');
+import {
+  NativeEventEmitter,
+  NativeModules,
+  Platform,
+  StyleSheet,
+  View,
+  requireNativeComponent
+} from 'react-native';
+const React = require('react');
 const PropTypes = require('prop-types');
-const StyleSheet = require('StyleSheet');
-const View = require('View');
-
-const deprecatedPropType = require('deprecatedPropType');
-const requireNativeComponent = require('requireNativeComponent');
-const RCTModalHostView = requireNativeComponent('RNModalHostView', null);
+const deprecatedPropType = require('react-native/Libraries/Utilities/deprecatedPropType');
+const RCTModalHostView = requireNativeComponent('RNModalNoUnmount', null);
 const ModalEventEmitter = Platform.OS === 'ios' && NativeModules.ModalManager ?
   new NativeEventEmitter(NativeModules.ModalManager) : null;
 
