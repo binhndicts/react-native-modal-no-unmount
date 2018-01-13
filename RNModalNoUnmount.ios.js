@@ -210,10 +210,6 @@ class Modal extends React.Component<Object> {
   }
 
   render(): React.Node {
-    // if (this.props.visible === false) {
-    //   return null;
-    // }
-
     const containerStyles = {
       backgroundColor: this.props.transparent ? 'transparent' : 'white',
     };
