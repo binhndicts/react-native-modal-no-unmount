@@ -55,19 +55,20 @@ The modification points are as below:
       compile project(':react-native-modal-no-unmount')
     ```
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
-
-1. In Visual Studio add the `RNModalNoUnmount.sln` in `node_modules/react-native-modal-no-unmount/windows/RNModalNoUnmount.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Modal.No.Unmount.RNModalNoUnmount;` to the usings at the top of the file
-  - Add `new RNModalNoUnmountPackage()` to the `List<IReactPackage>` returned by the `Packages` method
-
-
 ## Usage
 ```javascript
+import { Modal, Platform } from 'react-native';
 import RNModalNoUnmount from 'react-native-modal-no-unmount';
 
-// TODO: What to do with the module?
-RNModalNoUnmount;
+const ModalComponent = Platform.select({
+  ios: RNModalNoUnmount,
+  android: Modal,
+});
+
+...
+
+render() {
+    // Using it exactly as what you are doing with Modal component
+    return <ModalComponent>...</ModalComponent>
+}
 ```
