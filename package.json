@@ -1,6 +1,6 @@
 {
   "name": "react-native-modal-no-unmount",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Keep modal alive after invisble!",
   "main": "index.js",
   "scripts": {
