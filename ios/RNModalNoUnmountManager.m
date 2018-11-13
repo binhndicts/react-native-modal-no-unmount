@@ -32,6 +32,8 @@ RCT_EXPORT_MODULE()
 }
 
 RCT_EXPORT_VIEW_PROPERTY(visible, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(onOrientationChange, RCTDirectEventBlock)
 
 @end
+
   
